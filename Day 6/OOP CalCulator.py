@@ -16,11 +16,6 @@ class calci:
     def divide(self):
         return self.p / self.q
     
-   
-
-
-
-
 p=int(input("Enter I number:"))
 q=int(input("Enter II number:"))
 
@@ -43,6 +38,6 @@ while True:
     elif (perform == 0):
         print("Try operation")
     break
-else:
-    print("invalid option")
+
+    
 
