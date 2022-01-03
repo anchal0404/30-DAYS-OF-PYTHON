@@ -1,8 +1,21 @@
-import requests
-from bs4 import BeautifulSoup
+import urllib.request
+from bs4 import BeautifulSoup as bs
+import re
+import pandas as pd
 
-req=requests.get("https://www.horoscope.com/us/index.aspx")
+page = urllib.request.urlopen("https://www.horoscope.com/us/index.aspx")
+soup = bs(page)
 
-soup= BeautifulSoup(req.content,"html.parser")
+names = soup.body.findAll('a')
+function_names= re.findall('id="src-hp-.\w+',str(names))
+function_names=[item[11:] for item in function_names]
 
-print(soup.get_text())
+description=soup.body.find_all('p')
+function_usage=[]
+
+for item in description:
+    item=item.text
+    item=item.replace('/n','')
+    function_usage.append(item)
+print(function_names[:12])
+print(function_usage[:12])
