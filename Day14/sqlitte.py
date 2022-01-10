@@ -31,6 +31,10 @@ marvel_release = [
 cursor.executemany("insert into marvel values (?,?)",marvel_release)
 for row in cursor.execute("select * from marvel"):
     print (row)
+cursor.execute("DELETE from marvel where release_year=2014")
+connection.commit()
+print("deleted successfully")
+cursor.close
 
 
 connection.close()
