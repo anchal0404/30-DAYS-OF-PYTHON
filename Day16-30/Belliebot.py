@@ -1,7 +1,7 @@
 from discord import client
 import nextcord
 from nextcord.ext import commands
-import estoken
+import detoken
 clients = commands.Bot(command_prefix="#")
 
 @clients.command()
@@ -24,4 +24,4 @@ async def same(ctx):
     await ctx.reply(":)")
 
 
-clients.run(estoken.TOKEN)
+clients.run(detoken.TOKEN)
