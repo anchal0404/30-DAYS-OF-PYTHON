@@ -1,43 +1,43 @@
 
-from discord import client
 import nextcord
 from nextcord.ext import commands
-import detoken
-import aiohttp
+import detoken2
 import random
+import aiohttp
+clients = commands.Bot(command_prefix="!")
+clients.remove_command("help")
 
-clients = commands.Bot(command_prefix="#")
+@clients.command()
+async def help(ctx):
+    embed = nextcord.Embed(title='Help', description='!ping command for checking(It will send Pong)\n !hello command for asking bots name\n !fine as a reply for how are you\n !same for a smile')
+    await ctx.send(embed=embed)
 
 @clients.command()
 async def ping(ctx):
-    await ctx.reply("hehe")
+    await ctx.send("Pong!!")
 
 @clients.command()
 async def hello(ctx):
-    await ctx.reply("Hey! I am {0.user}".format(clients))
-    await ctx.reply("How are you?")
-
+    await ctx.send("Hey! I am {0.user}".format(clients))
+    await ctx.send("How are you?")
 
 @clients.command()
 async def fine(ctx):
-    await ctx.reply("That's Great")
-    await ctx.reply("Nice to meet you")
+    await ctx.send("That's Great")
+    await ctx.send("Nice to meet you")
 
 @clients.command()
 async def same(ctx):
-    await ctx.reply(":)")
+    await ctx.send(":)")
 
 @clients.command(pass_context=True)
 async def meme(ctx):
-     embed = nextcord.Embed(title="", description="")
+    embed = nextcord.Embed(title="", description="")
 
-     async with aiohttp.ClientSession() as cs:
+    async with aiohttp.ClientSession() as cs:
         async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
             res = await r.json()
             embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
-            await ctx.send(embed=embed)  
-   
-                
-
+            await ctx.send(embed=embed)
 
 clients.run(detoken.TOKEN)
